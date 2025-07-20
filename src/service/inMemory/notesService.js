@@ -1,4 +1,6 @@
+/* eslint no-underscore-dangle: 0 */
 const { nanoid } = require("nanoid");
+
 class NotesService {
   constructor() {
     this._notes = [];
@@ -25,9 +27,11 @@ class NotesService {
     }
     return newNote;
   }
+
   getNotes() {
     return this._notes;
   }
+
   getNoteById(id) {
     const note = this._notes.filter((n) => n.id === id)[0];
     if (!note) {
@@ -35,6 +39,7 @@ class NotesService {
     }
     return note;
   }
+
   editNoteById(id, { title, body, tags }) {
     const index = this._notes.findIndex((notes) => notes.id === id);
     if (index === -1) {
@@ -51,6 +56,7 @@ class NotesService {
     };
     return this._notes[index];
   }
+
   deleteNoteById(id) {
     const index = this._notes.findIndex((notes) => notes.id === id);
     if (index === -1) {
