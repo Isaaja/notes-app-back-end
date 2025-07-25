@@ -1,7 +1,5 @@
 /* eslint no-underscore-dangle: 0 */
 
-const InvariantError = require("../../exceptions/InvariantError");
-
 class NotesHandler {
   constructor(service, validator) {
     this._service = service;
