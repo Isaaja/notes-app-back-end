@@ -50,7 +50,7 @@ class AuthenticationsHandler {
     this._validator.validateDeleteAuthenticationPayload(request.payload);
     const { refreshToken } = request.payload;
     await this._authenticationsService.verifyRefreshToken(refreshToken);
-    await this.authenticationsService.deleteRefreshToken(refreshToken);
+    await this._authenticationsService.deleteRefreshToken(refreshToken);
     return {
       status: "success",
       message: "Refresh token berhasil dihapus",
