@@ -1,12 +1,10 @@
 const { Pool } = require("pg");
 const { nanoid } = require("nanoid");
 const InvariantError = require("../../exceptions/InvariantError");
-const NotFoundError = require("../../exceptions/NotFoundError");
 
 class CollaborationsService {
-  constructor(collaborationService) {
+  constructor() {
     this._pool = new Pool();
-    this._collaborator = collaborationService;
   }
 
   async addCollaboration(noteId, userId) {
@@ -42,21 +40,6 @@ class CollaborationsService {
     const result = await this._pool.query(query);
     if (!result.rows.length) {
       throw new InvariantError("Kolaborasi gagal diverifikasi");
-    }
-  }
-
-  async verifyNoteAccess(noteId, userId) {
-    try {
-      await this.verifyNoteOwner(noteId, userId);
-    } catch (error) {
-      if (error instanceof NotFoundError) {
-        throw error;
-      }
-      try {
-        await this._collaborationService.verifyCollaborator(noteId, userId);
-      } catch {
-        throw error;
-      }
     }
   }
 }
